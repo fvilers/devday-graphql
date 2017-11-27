@@ -2,6 +2,7 @@ class Person {
   constructor(id, firstName, lastName, email, friends = []) {
     this.id = id;
     this.firstName = firstName;
+    this.lastName = lastName;
     this.email = email;
     this.friends = friends.map(id => `/people/${id}`); // I know, this shouldn't be hard coded
   }
