@@ -9,6 +9,10 @@ class Person {
   static find() {
     return db;
   }
+
+  static get(id) {
+    return db.find(person => person.id === id);
+  }
 }
 
 const db = [
