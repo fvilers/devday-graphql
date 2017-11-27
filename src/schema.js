@@ -5,6 +5,7 @@ import {
   GraphQLInt,
   GraphQLNonNull
 } from 'graphql';
+import fetch from 'node-fetch';
 
 const PersonType = new GraphQLObjectType({
   name: 'Person',
@@ -30,7 +31,9 @@ const QueryType = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLInt) }
       },
-      resolve: () => null
+      resolve: (root, args) =>
+        fetch(`http://localhost:3000/people/${args.id}`)
+          .then(response => response.json())
     }
   })
 });
