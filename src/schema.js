@@ -9,7 +9,7 @@ import {
 } from 'graphql';
 import fetch from 'node-fetch';
 
-const fetchPerson = input => {
+const fetchJson = input => {
   const url = new URL(input, 'http://localhost:3000');
 
   return fetch(url.href)
@@ -26,7 +26,7 @@ const PersonType = new GraphQLObjectType({
     email: { type: GraphQLString },
     friends: {
       type: new GraphQLList(PersonType),
-      resolve: person => person.friends.map(fetchPerson)
+      resolve: person => person.friends.map(fetchJson)
     }
   })
 });
@@ -40,7 +40,11 @@ const QueryType = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLInt) }
       },
-      resolve: (root, args) => fetchPerson(`/people/${args.id}`)
+      resolve: (root, args) => fetchJson(`/people/${args.id}`)
+    },
+    people: {
+      type: new GraphQLList(PersonType),
+      resolve: () => fetchJson('/people')
     }
   })
 });
