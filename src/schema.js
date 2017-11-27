@@ -18,7 +18,7 @@ const fetchJson = input => {
 
 const PersonType = new GraphQLObjectType({
   name: 'Person',
-  description: '',
+  description: 'Somebody that you used to know',
   fields: () => ({
     id: { type: GraphQLInt },
     firstName: { type: GraphQLString },
@@ -26,6 +26,7 @@ const PersonType = new GraphQLObjectType({
     email: { type: GraphQLString },
     friends: {
       type: new GraphQLList(PersonType),
+      description: 'Everybody should have some',
       resolve: person => person.friends.map(fetchJson)
     }
   })
@@ -33,10 +34,11 @@ const PersonType = new GraphQLObjectType({
 
 const QueryType = new GraphQLObjectType({
   name: 'Query',
-  description: '',
+  description: 'The root of our queries (not as in "sudo make me sandwich")',
   fields: () => ({
     person: {
       type: PersonType,
+      description: 'Find people',
       args: {
         id: { type: new GraphQLNonNull(GraphQLInt) }
       },
@@ -44,6 +46,7 @@ const QueryType = new GraphQLObjectType({
     },
     people: {
       type: new GraphQLList(PersonType),
+      description: 'Get one person by its ID',
       resolve: () => fetchJson('/people')
     }
   })
