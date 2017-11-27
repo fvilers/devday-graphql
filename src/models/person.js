@@ -18,8 +18,8 @@ class Person {
 
 const db = [
   new Person(1, 'Fabian', 'Vilers', 'fabian.vilers@dev-one.com', [2, 3]),
-  new Person(2, 'Matthieu', 'Vandenhende', 'matthieu@devday.be'),
-  new Person(3, 'Adrien', 'Clerbois', 'adrien@devday.be')
+  new Person(2, 'Matthieu', 'Vandenhende', 'matthieu@devday.be', [1]),
+  new Person(3, 'Adrien', 'Clerbois', 'adrien@devday.be', [1])
 ];
 
 export default Person;
