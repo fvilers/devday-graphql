@@ -2,6 +2,9 @@
   "name": "devday-graphql",
   "version": "0.0.0",
   "description": "The sample used during my GraphQL presentation at DevDay 2017",
+  "scripts": {
+    "start:dev": "babel-node ./bin/www"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fvilers/devday-graphql.git"
@@ -16,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/fvilers/devday-graphql/issues"
   },
-  "homepage": "https://github.com/fvilers/devday-graphql#readme"
+  "homepage": "https://github.com/fvilers/devday-graphql#readme",
+  "dependencies": {
+    "debug": "3.1.0",
+    "express": "4.16.2"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-stage-2": "6.24.1"
+  }
 }
