@@ -1,11 +1,20 @@
+import { URL } from 'url';
 import {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLList
 } from 'graphql';
 import fetch from 'node-fetch';
+
+const fetchPerson = input => {
+  const url = new URL(input, 'http://localhost:3000');
+
+  return fetch(url.href)
+    .then(response => response.json());
+};
 
 const PersonType = new GraphQLObjectType({
   name: 'Person',
@@ -16,8 +25,8 @@ const PersonType = new GraphQLObjectType({
     lastName: { type: GraphQLString },
     email: { type: GraphQLString },
     friends: {
-      type: PersonType,
-      resolve: () => null
+      type: new GraphQLList(PersonType),
+      resolve: person => person.friends.map(fetchPerson)
     }
   })
 });
@@ -31,9 +40,7 @@ const QueryType = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLInt) }
       },
-      resolve: (root, args) =>
-        fetch(`http://localhost:3000/people/${args.id}`)
-          .then(response => response.json())
+      resolve: (root, args) => fetchPerson(`/people/${args.id}`)
     }
   })
 });
