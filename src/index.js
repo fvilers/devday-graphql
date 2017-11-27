@@ -1,7 +1,9 @@
+import path from 'path';
 import express from 'express';
 import compression from 'compression';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
+import favicon from 'serve-favicon';
 import logger from 'morgan';
 import graphQLHTTP from 'express-graphql';
 import { errorHandler } from './middlewares';
@@ -15,6 +17,7 @@ app.use(compression());
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use('/graphql', graphQLHTTP({
   context: { loaders },
