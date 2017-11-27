@@ -7,6 +7,7 @@ import graphQLHTTP from 'express-graphql';
 import { errorHandler } from './middlewares';
 import routes from './routes';
 import schema from './schema';
+import loaders from './loaders';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use('/graphql', graphQLHTTP({
+  context: { loaders },
   schema,
   graphiql: true
 }));

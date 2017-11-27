@@ -27,7 +27,7 @@ const PersonType = new GraphQLObjectType({
     friends: {
       type: new GraphQLList(PersonType),
       description: 'Everybody should have some',
-      resolve: person => person.friends.map(fetchJson)
+      resolve: (person, args, { loaders }) => loaders.person.loadMany(person.friends)
     }
   })
 });
@@ -42,7 +42,7 @@ const QueryType = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLInt) }
       },
-      resolve: (root, args) => fetchJson(`/people/${args.id}`)
+      resolve: (root, args, { loaders }) => loaders.person.load(`/people/${args.id}`)
     },
     people: {
       type: new GraphQLList(PersonType),
