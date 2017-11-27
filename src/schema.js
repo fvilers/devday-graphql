@@ -1,4 +1,3 @@
-import { URL } from 'url';
 import {
   GraphQLSchema,
   GraphQLObjectType,
@@ -7,14 +6,6 @@ import {
   GraphQLNonNull,
   GraphQLList
 } from 'graphql';
-import fetch from 'node-fetch';
-
-const fetchJson = input => {
-  const url = new URL(input, 'http://localhost:3000');
-
-  return fetch(url.href)
-    .then(response => response.json());
-};
 
 const PersonType = new GraphQLObjectType({
   name: 'Person',
@@ -47,7 +38,7 @@ const QueryType = new GraphQLObjectType({
     people: {
       type: new GraphQLList(PersonType),
       description: 'Get one person by its ID',
-      resolve: () => fetchJson('/people')
+      resolve: (root, args, { loaders }) => loaders.person.load('/people')
     }
   })
 });
