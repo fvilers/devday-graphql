@@ -1,0 +1,20 @@
+{
+  "name": "devday-graphql",
+  "version": "0.0.0",
+  "description": "The sample used during my GraphQL presentation at DevDay 2017",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fvilers/devday-graphql.git"
+  },
+  "keywords": [
+    "express",
+    "graphql",
+    "demo"
+  ],
+  "author": "Fabian Vilers <fabian.vilers@dev-one.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fvilers/devday-graphql/issues"
+  },
+  "homepage": "https://github.com/fvilers/devday-graphql#readme"
+}
