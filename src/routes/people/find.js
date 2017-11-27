@@ -1,7 +1,9 @@
-import createError from 'http-errors';
+import { Person } from '../../models';
 
-const find = () => {
-  throw new createError.NotImplemented();
+const find = (req, res) => {
+  const people = Person.find();
+
+  res.status(200).json(people);
 };
 
 export default () => find;
